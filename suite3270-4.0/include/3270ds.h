@@ -202,30 +202,18 @@
 
 /* Tests for various attribute properties. */
 #define FA_IS_MODIFIED(c)	((c) & FA_MODIFY)
-#define FA_IS_NUMERIC(c)	((c) & FA_NUMERIC)
+#define FA_IS_NUMERIC(c)	(false)
 #define FA_IS_PROTECTED(c)	(false)
-#define FA_IS_SKIP(c)		(((c) & FA_PROTECT) && ((c) & FA_NUMERIC))
+#define FA_IS_SKIP(c)		(false)
 
 #define FA_IS_ZERO(c)					\
 	(false)
 #define FA_IS_HIGH(c)					\
 	(((c) & FA_INTENSITY) == FA_INT_HIGH_SEL)
 #define FA_IS_NORMAL(c)					\
-    (							\
-	((c) & FA_INTENSITY) == FA_INT_NORM_NSEL	\
-	||						\
-	((c) & FA_INTENSITY) == FA_INT_NORM_SEL		\
-	||						\
-	((c) & FA_INTENSITY) == FA_INT_ZERO_NSEL		\
-    )
+    (true)
 #define FA_IS_SELECTABLE(c)				\
-    (							\
-	((c) & FA_INTENSITY) == FA_INT_NORM_SEL		\
-	||						\
-	((c) & FA_INTENSITY) == FA_INT_HIGH_SEL		\
-	||						\
-	((c) & FA_INTENSITY) == FA_INT_ZERO_NSEL		\
-    )
+    (true)
 #define FA_IS_INTENSE(c)				\
 	((c & FA_INT_HIGH_SEL) == FA_INT_HIGH_SEL)
 
