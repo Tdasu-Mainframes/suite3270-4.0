@@ -187,7 +187,7 @@
 
 /* Field attributes. */
 #define FA_PRINTABLE	0xc0	/* these make the character "printable" */
-#define FA_PROTECT	0x20	/* unprotected (0) / protected (1) */
+#define FA_PROTECT	0x00	/* unprotected (0) / protected (1) */
 #define FA_NUMERIC	0x00	/* alphanumeric (0) /numeric (1) */
 #define FA_INTENSITY	0x0c	/* display/selector pen detectable: */
 #define FA_INT_NORM_NSEL 0x00	/*  00 normal, non-detect */
@@ -202,18 +202,18 @@
 
 /* Tests for various attribute properties. */
 #define FA_IS_MODIFIED(c)	((c) & FA_MODIFY)
-#define FA_IS_NUMERIC(c)	(false)
-#define FA_IS_PROTECTED(c)	(false)
-#define FA_IS_SKIP(c)		(false)
+#define FA_IS_NUMERIC(c)	((c) & FA_NUMERIC)
+#define FA_IS_PROTECTED(c)	((c) & FA_PROTECT)
+#define FA_IS_SKIP(c)		(((c) & FA_PROTECT) && ((c) & FA_NUMERIC))
 
 #define FA_IS_ZERO(c)					\
-	(false)
+	((c) & false)
 #define FA_IS_HIGH(c)					\
 	(((c) & FA_INTENSITY) == FA_INT_HIGH_SEL)
 #define FA_IS_NORMAL(c)					\
-    (true)
+    ((c) & true)
 #define FA_IS_SELECTABLE(c)				\
-    (true)
+    ((c) & true)
 #define FA_IS_INTENSE(c)				\
 	((c & FA_INT_HIGH_SEL) == FA_INT_HIGH_SEL)
 
