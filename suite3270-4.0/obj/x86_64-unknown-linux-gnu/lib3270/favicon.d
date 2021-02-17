@@ -1,1 +1,0 @@
-favicon.o: favicon.c
