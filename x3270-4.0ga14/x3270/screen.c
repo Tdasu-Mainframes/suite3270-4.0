@@ -454,6 +454,7 @@ static struct rsfont *rsfonts;
 #define DEFAULT_PIXEL		(mode.m3279 ? HOST_COLOR_BLUE : FA_INT_NORM_NSEL)
 #define PIXEL_INDEX(c)		((c) & BASE_MASK)
 
+static struct sstate nss_backup;
 static struct sp* nss_backup_image;
 static struct ea* ea_buf_backup;
 
@@ -469,6 +470,7 @@ rescale(Dimension d)
 void
 save_image()
 {
+    nss_backup = nss;
     memcpy( nss_backup_image, nss.image, sizeof(struct sp) * maxROWS * maxCOLS);
     memcpy( ea_buf_backup, ea_buf, sizeof(struct ea) * ((maxROWS * maxCOLS) + 1));
     printf("saving image \n");
@@ -477,6 +479,7 @@ save_image()
 void
 recall_image()
 {
+    nss = nss_backup;
     memcpy( temp_image, nss.image, sizeof(struct sp) * maxROWS * maxCOLS);
     memcpy( ea_buf, ea_buf_backup, sizeof(struct sp) * ((maxROWS * maxCOLS) + 1));
     resync_display(nss_backup_image, 0, ROWS*COLS);
